@@ -264,6 +264,15 @@ body {
   min-height: 20px;
 }
 
+.name:hover {
+  background-color: rgba(0, 0, 0, 0.411);
+  cursor: pointer;
+}
+
+.name {
+  text-align: left;
+}
+
 @media (max-width: 768px) {
   .time {
     min-height: 80px;

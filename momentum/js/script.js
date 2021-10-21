@@ -1,5 +1,4 @@
 console.log(`script js loaded`)
 
-import { clock } from './clock.js'
-
-clock()
+import * as clock from './clock.js'
+import * as greeting from './greeting.js'

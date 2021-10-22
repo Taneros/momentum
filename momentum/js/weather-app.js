@@ -55,38 +55,3 @@ function getLocalStorageCity() {
 
 window.addEventListener('beforeunload', setLocalStorageCity)
 window.addEventListener('load', getLocalStorageCity)
-
-// TODO
-/**
- * city check
- * error display
- * input hover bg change
- *
- */
-
-/***
- * 
-        try {
-         const res = await fetch(url);
-         const data = await res.json();
-          ...
-       } catch (error) {
-         ...
-      }
- */
-
-/*
-      async function getWeather() {
-        const RES = await fetch(url)
-        const DATA = await RES.json()
-        const LS_S = localStorage.getItem('sky', DATA.weather[0].id) || DATA.weather[0].id
-        WEATHER_ICON.classList.remove(`owf-${LS_S}`)
-        WEATHER_ICON.classList.add(`owf-${DATA.weather[0].id}`)
-        localStorage.setItem('sky', DATA.weather[0].id)
-        TEMP.textContent = `${DATA.main.temp.toFixed(1)}°C`
-        WEATHER_DESC.textContent = `${DATA.weather[0].description}`
-        WIND.textContent = `Wind speed: ${DATA.wind.speed.toFixed(0)} m/s`
-        HUMID.textContent = `Humidity: ${DATA.main.humidity}%`
-      }
-
-      */

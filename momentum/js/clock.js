@@ -2,7 +2,7 @@ console.log(`clock.js loaded`)
 
 let log = console.log
 
-import { showGreeting } from './greeting.js'
+import { showGreeting } from './greeting.js' // use {} without default export
 
 export const TIME = document.querySelector('.time')
 export const DATE = document.querySelector('.date')

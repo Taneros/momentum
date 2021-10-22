@@ -11,25 +11,25 @@ const BODY = document.querySelector('body')
 const IMG_LINK = 'https://raw.githubusercontent.com/Taneros/stage1-tasks/assets/images/'
 const SLIDE_PREV = document.querySelector('.slide-prev')
 const SLIDE_NEXT = document.querySelector('.slide-next')
-SLIDE_NEXT.addEventListener('click', getSlideNext)
-SLIDE_PREV.addEventListener('click', getSlidePrev)
+SLIDE_NEXT.addEventListener('click', bounce(getSlideNext, 500))
+SLIDE_PREV.addEventListener('click', bounce(getSlidePrev, 500))
 
 getRandomNum()
 setBG()
 
-function debounce(func, wait, immediate) {
+function bounce(f, w, i) {
   var timeout
   return function () {
     var context = this,
       args = arguments
     var later = function () {
       timeout = null
-      if (!immediate) func.apply(context, args)
+      if (!i) f.apply(context, args)
     }
-    var callNow = immediate && !timeout
+    var callNow = i && !timeout
     clearTimeout(timeout)
-    timeout = setTimeout(later, wait)
-    if (callNow) func.apply(context, args)
+    timeout = setTimeout(later, w)
+    if (callNow) f.apply(context, args)
   }
 }
 
@@ -49,9 +49,6 @@ function setBG() {
     BODY.style.cssText = `background-image: url('${IMG_LINK + getTimeOfDay().split(' ')[1] + '/' + randomNum}.jpg')`
   }
 }
-
-SLIDE_NEXT.addEventListener('click', getSlideNext)
-SLIDE_PREV.addEventListener('click', getSlidePrev)
 
 function getSlideNext() {
   const NUM = Number(randomNum)

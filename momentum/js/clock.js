@@ -1,4 +1,4 @@
-console.log(`clock.js loaded`)
+console.log(`✔️clock.js loaded`)
 
 let log = console.log
 

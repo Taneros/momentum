@@ -1,4 +1,4 @@
-console.log(`greeting.js loaded`)
+console.log(`✔️greeting.js loaded`)
 
 let log = console.log
 

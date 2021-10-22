@@ -1,4 +1,4 @@
-console.log(`bg-change.js loaded`)
+console.log(`✔️bg-change.js loaded`)
 
 let log = console.log
 
@@ -41,18 +41,18 @@ function getRandomNum() {
 }
 
 function setBG() {
-  log(`setBG randomNum ${randomNum}`)
+  // log(`setBG randomNum ${randomNum}`)
   const img = new Image()
   img.src = `${IMG_LINK + getTimeOfDay().split(' ')[1] + '/' + randomNum}.jpg`
   img.onload = () => {
-    log(`image loaded`)
+    // log(`image loaded`)
     BODY.style.cssText = `background-image: url('${IMG_LINK + getTimeOfDay().split(' ')[1] + '/' + randomNum}.jpg')`
   }
 }
 
 function getSlideNext() {
   const NUM = Number(randomNum)
-  log(NUM)
+  // log(NUM)
   if (NUM === 20) randomNum = `${1}`.padStart(2, '0')
   else randomNum = (NUM + 1).toString().padStart(2, '0')
   setBG()
@@ -60,7 +60,7 @@ function getSlideNext() {
 
 function getSlidePrev() {
   const NUM = Number(randomNum)
-  log(NUM)
+  // log(NUM)
   if (NUM === 1) randomNum = `${20}`.padStart(2, '0')
   else randomNum = (NUM - 1).toString().padStart(2, '0')
   setBG()

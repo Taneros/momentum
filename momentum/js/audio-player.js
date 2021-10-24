@@ -134,6 +134,10 @@ Array.from(playListItems).forEach((el) =>
     playNum = el.dataset.playlistId
     newSrc()
     // log('playNum new', playNum)
+    if (isPlaying) {
+      triggerEvent(PLAY)
+      triggerEvent(PLAY)
+    }
   })
 )
 

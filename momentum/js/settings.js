@@ -26,7 +26,7 @@ SETTINGS.addEventListener('click', () => openNav())
 CLOSE.addEventListener('click', () => closeNav())
 CHECKBOX.forEach((el) =>
   el.addEventListener('click', () => {
-    log(el)
+    // log(el)
     if (!el.checked) el.setAttribute('checked', 'true')
     updateItems()
   })
@@ -190,10 +190,6 @@ window.addEventListener('beforeunload', setLocalStorageSettings)
 window.addEventListener('load', getLocalStorageSettings)
 
 /**
- *
- * receive a call
- * turn of or on element on close of myNav
- * tun on of on window load > load data from storage
  *
  *
  */

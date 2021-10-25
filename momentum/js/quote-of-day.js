@@ -2,18 +2,18 @@ console.log(`✔️quote-of-day.js loaded`)
 
 let log = console.log
 
-const API_URL = 'https://type.fit/api/quotes'
+const API_URL = { locale: 'https://type.fit/api/quotes' }
 const QUOTE = document.querySelector('.quote')
 const AUTHOR = document.querySelector('.author')
 const CHANGE_Q = document.querySelector('.change-quote')
 let btn_pressed = false
-getQuotes(API_URL)
+getQuotes(API_URL.locale)
 const SLEEP = (milliseconds = 500) => new Promise((resolve) => setTimeout(resolve, milliseconds))
 
 CHANGE_Q.addEventListener('click', () => {
   ;(async () => {
     await SLEEP(500)
-    getQuotes(API_URL)
+    getQuotes(API_URL.locale)
   })()
 })
 
@@ -35,6 +35,7 @@ function bounce(f, w, i) {
 }
 
 async function getQuotes(url) {
+  log(url)
   try {
     // console.log(`API_URL ${url}`)
     const res = await fetch(url)
@@ -49,3 +50,5 @@ async function getQuotes(url) {
     getQuotes('./js/quotes.json')
   }
 }
+
+export { API_URL, getQuotes }

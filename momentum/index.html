@@ -47,19 +47,58 @@
       </div>
     </main>
     <footer class="footer">
-      <button class="change-quote"></button>
-      <div>
-        <div class="quote"></div>
-        <div class="author"></div>
+      <div class="quote-container">
+        <button class="change-quote"></button>
+        <div>
+          <div class="quote"></div>
+          <div class="author"></div>
+        </div>
       </div>
       <button class="settings"><i class="fa fa-gear"></i></button>
       <div id="myNav" class="overlay">
         <a href="#" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="overlay-content">
-          <a href="#">About</a>
-          <a href="#">Services</a>
-          <a href="#">Clients</a>
-          <a href="#">Contact</a>
+          <div class="overlay-content__hideShowEl">
+            <h2 class="overlay-content__header">Hide Elements</h2>
+            <div class="hideShowEl__checkbox">
+              <label class="container"
+                >Time
+                <input type="checkbox" data-time-show="" value="time" checked="true" />
+                <span class="checkmark"></span>
+              </label>
+              <label class="container"
+                >Date
+                <input type="checkbox" data-date-show="" value="date" checked="true" />
+                <span class="checkmark"></span>
+              </label>
+              <label class="container"
+                >Greeting
+                <input type="checkbox" data-greeting-show="" value="greeting" checked="true" />
+                <span class="checkmark"></span>
+              </label>
+              <label class="container"
+                >Quote of Day
+                <input type="checkbox" data-quote-show="" value="quote" checked="true" />
+                <span class="checkmark"></span>
+              </label>
+              <label class="container"
+                >Weather
+                <input type="checkbox" data-weather-show="" value="weather" checked="true" />
+                <span class="checkmark"></span>
+              </label>
+              <label class="container"
+                >Audio Player
+                <input type="checkbox" data-audio-player-show="" value="audio-player" checked="true" />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          <div class="overlay-content__backgroundSrc">
+            <h2 class="overlay-content__header">Change Background</h2>
+          </div>
+          <div class="overlay-content__translate">
+            <h2 class="overlay-content__header">Translate</h2>
+          </div>
         </div>
       </div>
     </footer>

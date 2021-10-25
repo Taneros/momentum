@@ -2,7 +2,9 @@ console.log(`✔️settings.js loaded`)
 
 let log = console.log
 
-let state = {
+import { translate } from './translate.js'
+
+export let state = {
   language: 'EN',
   photoSrc: 'github',
   blocks: [],
@@ -51,6 +53,7 @@ function openNav() {
 function closeNav() {
   document.getElementById('myNav').style.height = '0%'
   showHide()
+  translate()
 }
 
 function updateState() {
@@ -138,6 +141,7 @@ function onloadUpdate() {
     CHECKBOX_TRANS[1].setAttribute('checked', 'checked')
     CHECKBOX_TRANS[0].removeAttribute('checked')
   }
+  translate()
 }
 
 function showHide() {

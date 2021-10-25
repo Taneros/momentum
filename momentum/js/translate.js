@@ -3,7 +3,7 @@ console.log(`✔️translate.js loaded`)
 let log = console.log
 
 import { locale, showDate, showTime } from './clock.js'
-import { state } from './settings.js'
+import { state, updateState, onloadUpdate } from './settings.js'
 import { GREETING_TEXT } from './greeting.js'
 import { API_URL, getQuotes } from './quote-of-day.js'
 import { WEATHER_LOCALE, getWeather } from './weather-app.js'
@@ -18,6 +18,33 @@ const RU_CITY_LOCALE = 'ru'
 // log('translate', state)
 
 function translate() {
+  // /html/body/footer/div[2]/div/div[1]/div/label[1]/text()
+  // translate hide elements
+  if (state.language === 'RU') {
+    document.querySelector('#myNav > div > div.overlay-content__hideShowEl > div > label:nth-child(1) > span:nth-child(1)').textContent = 'Часы'
+    document.querySelector('#myNav > div > div.overlay-content__hideShowEl > div > label:nth-child(2) > span:nth-child(1)').textContent = 'Дата'
+    document.querySelector('#myNav > div > div.overlay-content__hideShowEl > div > label:nth-child(3) > span:nth-child(1)').textContent = 'Приветствие'
+    document.querySelector('#myNav > div > div.overlay-content__hideShowEl > div > label:nth-child(4) > span:nth-child(1)').textContent = 'Цитата дня'
+    document.querySelector('#myNav > div > div.overlay-content__hideShowEl > div > label:nth-child(5) > span:nth-child(1)').textContent = 'Погода'
+    document.querySelector('#myNav > div > div.overlay-content__hideShowEl > div > label:nth-child(6) > span:nth-child(1)').textContent = 'Аудио плеер'
+  } else {
+    document.querySelector('#myNav > div > div.overlay-content__hideShowEl > div > label:nth-child(1) > span:nth-child(1)').textContent = 'Time'
+    document.querySelector('#myNav > div > div.overlay-content__hideShowEl > div > label:nth-child(2) > span:nth-child(1)').textContent = 'Date'
+    document.querySelector('#myNav > div > div.overlay-content__hideShowEl > div > label:nth-child(3) > span:nth-child(1)').textContent = 'Greeting'
+    document.querySelector('#myNav > div > div.overlay-content__hideShowEl > div > label:nth-child(4) > span:nth-child(1)').textContent = 'Quote of Day'
+    document.querySelector('#myNav > div > div.overlay-content__hideShowEl > div > label:nth-child(5) > span:nth-child(1)').textContent = 'Weather'
+    document.querySelector('#myNav > div > div.overlay-content__hideShowEl > div > label:nth-child(6) > span:nth-child(1)').textContent = 'Audio player'
+  }
+  // translate settigns
+  if (state.language === 'RU') {
+    document.querySelector('#myNav > div > div.overlay-content__hideShowEl > h2').textContent = 'Скрыть элементы'
+    document.querySelector('#myNav > div > div.overlay-content__backgroundSrc > h2').textContent = 'Сменить заставку'
+    document.querySelector('#myNav > div > div.overlay-content__translate > h2').textContent = 'Сменить язык'
+  } else {
+    document.querySelector('#myNav > div > div.overlay-content__hideShowEl > h2').textContent = 'Hide Elements'
+    document.querySelector('#myNav > div > div.overlay-content__backgroundSrc > h2').textContent = 'Change Background'
+    document.querySelector('#myNav > div > div.overlay-content__translate > h2').textContent = 'Change Language'
+  }
   // translate weather
   if (state.language === 'RU') {
     WEATHER_LOCALE.cityValue = localStorage.getItem('city') || 'Минск'
@@ -29,7 +56,7 @@ function translate() {
     document.querySelector('.city').dispatchEvent(new MouseEvent('change', { bubbles: true, cancellable: true }))
     // getWeather()
   } else {
-    document.querySelector('.city').value = 'Minsk'
+    document.querySelector('.city').value = localStorage.getItem('city') || 'Minsk'
     WEATHER_LOCALE.cityValue = localStorage.getItem('city') || 'Minsk'
     WEATHER_LOCALE.locale = 'en'
     WEATHER_LOCALE.wind = 'Wind speed'

@@ -4,7 +4,7 @@ let log = console.log
 
 import { translate } from './translate.js'
 
-export let state = {
+let state = {
   language: 'EN',
   photoSrc: 'github',
   blocks: [],
@@ -220,3 +220,5 @@ window.addEventListener('load', getLocalStorageSettings)
  *
  *
  */
+
+export { state, updateState, onloadUpdate }

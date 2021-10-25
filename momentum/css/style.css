@@ -251,6 +251,7 @@ body {
   border: 0;
   outline: 0;
   transition: background-color 0.5s ease-out;
+  border-radius: 5px;
 }
 
 .name::placeholder {
@@ -268,6 +269,10 @@ body {
   height: 30vh;
   min-height: 160px;
   padding: 20px;
+}
+
+.quote-container {
+  width: 70vw;
 }
 
 .change-quote {
@@ -300,6 +305,7 @@ body {
   font-size: 32px;
   cursor: pointer;
   background-color: transparent;
+  transition: background-color 0.5s ease-out;
 }
 
 .settings i {
@@ -308,12 +314,13 @@ body {
 
 .settings:hover {
   background-color: rgba(0, 0, 0, 0.411);
+  transition: all 0.5s ease-in;
 }
 
 .overlay {
   height: 0%;
   /* leave 100%  for debugging */
-  /* height: 100%; */
+  height: 100%;
   width: 100%;
   position: fixed;
   z-index: 1;
@@ -331,7 +338,7 @@ body {
   text-align: center;
   margin-top: auto;
   margin-bottom: auto;
-  background-color: tomato;
+  /* background-color: tomato; */
   top: 50%;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
@@ -369,15 +376,17 @@ body {
   position: relative;
   height: 100%;
   width: 30%;
-  background-color: turquoise;
+  /* background-color: turquoise; */
   padding: 1rem;
+  outline: 1px solid #fff;
+  border-radius: 5px;
 }
 
 .overlay-content__header {
   font-size: 2rem;
 }
 
-.overlay-content div:first-child > * + * {
+.overlay-content div > div {
   margin-top: 30px;
 }
 
@@ -411,8 +420,7 @@ body {
   width: 0;
 }
 
-/* Create a custom checkbox */
-.checkmark {
+.hideShowEl__checkbox .checkmark {
   position: absolute;
   top: 0;
   left: 0;
@@ -421,30 +429,25 @@ body {
   background-color: #eee;
 }
 
-/* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
+.hideShowEl__checkbox .container:hover input ~ .checkmark {
   background-color: #ccc;
 }
 
-/* When checkbox is checked, add a blue background */
-.container input:checked ~ .checkmark {
+.hideShowEl__checkbox .container input:checked ~ .checkmark {
   background-color: #2196f3;
 }
 
-/* Create checkmark/indicator (hidden when not checked) */
-.checkmark:after {
+.hideShowEl__checkbox .checkmark:after {
   content: '';
   position: absolute;
   display: none;
 }
 
-/* Show checkmark when checked */
-.container input:checked ~ .checkmark:after {
+.hideShowEl__checkbox .container input:checked ~ .checkmark:after {
   display: block;
 }
 
-/* Style checkmark/indicator */
-.container .checkmark:after {
+.hideShowEl__checkbox .container .checkmark:after {
   left: 7px;
   top: 3px;
   width: 10px;
@@ -454,6 +457,87 @@ body {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+/* Change bg styles */
+
+.overlay-content__backgroundSrc > div {
+}
+
+.overlay-content__backgroundSrc > div p {
+  text-align: justify;
+  line-height: 2rem;
+  font-size: 1.3rem;
+  width: auto;
+}
+
+/* Translation section styles */
+
+.translate__checkbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.translate__checkbox .container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  /* margin-bottom: 12px; */
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.translate__checkbox .container:last-child {
+  margin-left: 20px;
+}
+
+.translate__checkbox .container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.translate__checkbox .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+.translate__checkbox .container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.translate__checkbox .container input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+
+.translate__checkbox .checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+.translate__checkbox .container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.translate__checkbox .container .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
 }
 
 /* app reseize */

@@ -40,13 +40,25 @@ function getRandomNum() {
   randomNum = NUM.padStart(2, '0')
 }
 
+function getTimeOfDayBg() {
+  const DATE_OBJ = new Date()
+  const TIME_HR = DATE_OBJ.getHours()
+  const TIME_MIN = DATE_OBJ.getMinutes()
+  // const TIME = TIME_HR.toString() + ':' + TIME_MIN.toString()
+  // log(TIME)
+  if (TIME_HR >= 6 && TIME_HR < 12) return 'morning'
+  else if (TIME_HR >= 12 && TIME_HR < 18) return 'afternoon'
+  else if (TIME_HR >= 18 && TIME_HR < 24) return 'evening'
+  else if (TIME_HR >= 0 && TIME_HR < 6) return 'night'
+}
+
 function setBG() {
   // log(`setBG randomNum ${randomNum}`)
   const img = new Image()
-  img.src = `${IMG_LINK + getTimeOfDay().split(' ')[1] + '/' + randomNum}.jpg`
+  img.src = `${IMG_LINK + getTimeOfDayBg() + '/' + randomNum}.jpg`
   img.onload = () => {
     // log(`image loaded`)
-    BODY.style.cssText = `background-image: url('${IMG_LINK + getTimeOfDay().split(' ')[1] + '/' + randomNum}.jpg')`
+    BODY.style.cssText = `background-image: url('${IMG_LINK + getTimeOfDayBg() + '/' + randomNum}.jpg')`
   }
 }
 

@@ -3,14 +3,15 @@ console.log(`✔️settings.js loaded`)
 let log = console.log
 
 let state = {
-  language: 'en',
+  language: 'EN',
   photoSrc: 'github',
   blocks: [],
 }
 
 const SETTINGS = document.querySelector('.settings')
 const CLOSE = document.querySelector('.closebtn')
-const CHECKBOX = document.querySelectorAll('#myNav > div > div.overlay-content__hideShowEl input[type=checkbox]')
+const CHECKBOX_HIDESHOW = document.querySelectorAll('#myNav > div > div.overlay-content__hideShowEl input[type=checkbox]')
+const CHECKBOX_TRANS = document.querySelectorAll('#myNav > div > div.overlay-content__translate input[type=radio]')
 // ELEMENTS TO HIDE
 const TIME = document.querySelector('.time')
 const DATE = document.querySelector('.date')
@@ -24,11 +25,21 @@ const PLAYER = document.querySelector('.player')
 // EVENT LISTENERS
 SETTINGS.addEventListener('click', () => openNav())
 CLOSE.addEventListener('click', () => closeNav())
-CHECKBOX.forEach((el) =>
+CHECKBOX_TRANS.forEach((el) => {
+  el.addEventListener('click', () => {
+    if (!el.checked) el.setAttribute('checked', 'true')
+    log(el.value)
+    // state.language == el.value
+    if (el.value === 'RU') CHECKBOX_TRANS[0].removeAttribute('checked')
+    if (el.value === 'EN') CHECKBOX_TRANS[1].removeAttribute('checked')
+    updateState()
+  })
+})
+CHECKBOX_HIDESHOW.forEach((el) =>
   el.addEventListener('click', () => {
     // log(el)
     if (!el.checked) el.setAttribute('checked', 'true')
-    updateItems()
+    updateState()
   })
 )
 
@@ -42,8 +53,8 @@ function closeNav() {
   showHide()
 }
 
-function updateItems() {
-  Array.from(CHECKBOX).forEach((el) => {
+function updateState() {
+  Array.from(CHECKBOX_HIDESHOW).forEach((el) => {
     // log(el.checked)
     // check element add to db
     if (el.checked && !state.blocks.includes(el.value)) {
@@ -63,7 +74,12 @@ function updateItems() {
       }
     }
   })
-  log(state.blocks)
+  CHECKBOX_TRANS.forEach((el) => {
+    if (el.checked) state.language = el.value
+    log('updateItems()', state.language)
+  })
+  // log(CHECKBOX_TRANS[0].checked, CHECKBOX_TRANS[1].checked)
+  log(state)
 }
 
 function onloadUpdate() {
@@ -71,42 +87,42 @@ function onloadUpdate() {
     switch (el) {
       case 'time-hide':
         log(el)
-        CHECKBOX.forEach((el) => {
+        CHECKBOX_HIDESHOW.forEach((el) => {
           if (el.value === 'time') el.removeAttribute('checked')
         })
         break
       //
       case 'date-hide':
         log(el)
-        CHECKBOX.forEach((el) => {
+        CHECKBOX_HIDESHOW.forEach((el) => {
           if (el.value === 'date') el.removeAttribute('checked')
         })
         break
       //
       case 'greeting-hide':
         log(el)
-        CHECKBOX.forEach((el) => {
+        CHECKBOX_HIDESHOW.forEach((el) => {
           if (el.value === 'greeting') el.removeAttribute('checked')
         })
         break
       //
       case 'quote-hide':
         log(el)
-        CHECKBOX.forEach((el) => {
+        CHECKBOX_HIDESHOW.forEach((el) => {
           if (el.value === 'quote') el.removeAttribute('checked')
         })
         break
       //
       case 'weather-hide':
         log(el)
-        CHECKBOX.forEach((el) => {
+        CHECKBOX_HIDESHOW.forEach((el) => {
           if (el.value === 'weather') el.removeAttribute('checked')
         })
         break
       //
       case 'audio-player-hide':
         log(el)
-        CHECKBOX.forEach((el) => {
+        CHECKBOX_HIDESHOW.forEach((el) => {
           if (el.value === 'audio-player') el.removeAttribute('checked')
         })
         break
@@ -115,6 +131,13 @@ function onloadUpdate() {
         break
     }
   })
+  if (state.language === 'EN') {
+    CHECKBOX_TRANS[0].setAttribute('checked', 'checked')
+    CHECKBOX_TRANS[1].removeAttribute('checked')
+  } else {
+    CHECKBOX_TRANS[1].setAttribute('checked', 'checked')
+    CHECKBOX_TRANS[0].removeAttribute('checked')
+  }
 }
 
 function showHide() {
@@ -177,7 +200,7 @@ function setLocalStorageSettings() {
 function getLocalStorageSettings() {
   // log(JSON.parse(localStorage.getItem('settings')))
   if (!localStorage.getItem('settings')) {
-    updateItems()
+    updateState()
   } else {
     state = JSON.parse(localStorage.getItem('settings'))
     showHide()

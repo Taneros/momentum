@@ -18,7 +18,7 @@ CHANGE_Q.addEventListener('click', () => {
 })
 
 function bounce(f, w, i) {
-  console.log(`debounce f:${f}, w:${w}`)
+  // console.log(`debounce f:${f}, w:${w}`)
   var timeout
   return function () {
     var context = this,
@@ -35,7 +35,7 @@ function bounce(f, w, i) {
 }
 
 async function getQuotes(url) {
-  log(url)
+  // log(url)
   try {
     // console.log(`API_URL ${url}`)
     const res = await fetch(url)

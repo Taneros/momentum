@@ -9,22 +9,30 @@ const CITY = document.querySelector('.city')
 const WIND = document.querySelector('.wind')
 const HUMID = document.querySelector('.humidity')
 const WEATHER_ERR = document.querySelector('.weather-error')
+const WEATHER_LOCALE = {
+  cityValue: localStorage.getItem('city') || CITY.value,
+  locale: 'en',
+  wind: 'Wind speed',
+  wind_speed: 'm/s',
+  humidity: 'Humidity',
+}
 
 // log(`CITY.value on load ${CITY.value}`)
-let cityValue = localStorage.getItem('city') || CITY.value
-let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityValue}&lang=en&appid=42ecf345f3c5d6c38e11a4216450bac6&units=metric`
+// let cityValue = localStorage.getItem('city') || CITY.value
+let url = `https://api.openweathermap.org/data/2.5/weather?q=${WEATHER_LOCALE.cityValue}&lang=${WEATHER_LOCALE.locale}&appid=42ecf345f3c5d6c38e11a4216450bac6&units=metric`
 // let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityValue}&lang=en&appid=2cce539450db32c7a4de695cf7dec20a&units=metric`
 
 getWeather()
 
 CITY.addEventListener('change', () => {
-  cityValue = CITY.value.trim().replace(/^\w/, (c) => c.toUpperCase())
-  url = `https://api.openweathermap.org/data/2.5/weather?q=${cityValue}&lang=en&appid=42ecf345f3c5d6c38e11a4216450bac6&units=metric`
+  WEATHER_LOCALE.cityValue = CITY.value.trim().replace(/^\w/, (c) => c.toUpperCase())
+  url = `https://api.openweathermap.org/data/2.5/weather?q=${WEATHER_LOCALE.cityValue}&lang=${WEATHER_LOCALE.locale}&appid=42ecf345f3c5d6c38e11a4216450bac6&units=metric`
   // url = `https://api.openweathermap.org/data/2.5/weather?q=${cityValue}&lang=en&appid=2cce539450db32c7a4de695cf7dec20a&units=metric`
   getWeather()
 })
 
 async function getWeather() {
+  log('weather-app.js', url)
   try {
     const RES = await fetch(url)
     const DATA = await RES.json()
@@ -36,8 +44,8 @@ async function getWeather() {
     localStorage.setItem('sky', DATA.weather[0].id)
     TEMP.textContent = `${DATA.main.temp.toFixed(1)}°C`
     WEATHER_DESC.textContent = `${DATA.weather[0].description}`
-    WIND.textContent = `Wind speed: ${DATA.wind.speed.toFixed(0)} m/s`
-    HUMID.textContent = `Humidity: ${DATA.main.humidity}%`
+    WIND.textContent = `${WEATHER_LOCALE.wind}: ${DATA.wind.speed.toFixed(0)} ${WEATHER_LOCALE.wind_speed}`
+    HUMID.textContent = `${WEATHER_LOCALE.humidity}: ${DATA.main.humidity}%`
   } catch (error) {
     WEATHER_ERR.textContent = 'City not found'
     WEATHER_ICON.style.display = 'none'
@@ -49,12 +57,14 @@ async function getWeather() {
 }
 
 function setLocalStorageCity() {
-  localStorage.setItem('city', cityValue)
+  localStorage.setItem('city', WEATHER_LOCALE.cityValue)
 }
 
 function getLocalStorageCity() {
-  CITY.value = localStorage.getItem('city') || cityValue
+  CITY.value = localStorage.getItem('city') || WEATHER_LOCALE.cityValue
 }
 
 window.addEventListener('beforeunload', setLocalStorageCity)
 window.addEventListener('load', getLocalStorageCity)
+
+export { WEATHER_LOCALE, getWeather }

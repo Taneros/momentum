@@ -6,7 +6,7 @@ import { showGreeting } from './greeting.js' // use {} without default export
 
 const TIME = document.querySelector('.time')
 const DATE = document.querySelector('.date')
-let locale = { timeLocale: 'en-US', dateLocale: 'en-US' }
+const locale = { timeLocale: 'en-US', dateLocale: 'en-US' }
 
 // display time
 export function showTime() {

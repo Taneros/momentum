@@ -30,7 +30,7 @@ CLOSE.addEventListener('click', () => closeNav())
 CHECKBOX_TRANS.forEach((el) => {
   el.addEventListener('click', () => {
     if (!el.checked) el.setAttribute('checked', 'true')
-    log(el.value)
+    // log(el.value)
     // state.language == el.value
     if (el.value === 'RU') CHECKBOX_TRANS[0].removeAttribute('checked')
     if (el.value === 'EN') CHECKBOX_TRANS[1].removeAttribute('checked')
@@ -79,52 +79,52 @@ function updateState() {
   })
   CHECKBOX_TRANS.forEach((el) => {
     if (el.checked) state.language = el.value
-    log('updateItems()', state.language)
+    // log('updateItems()', state.language)
   })
   // log(CHECKBOX_TRANS[0].checked, CHECKBOX_TRANS[1].checked)
-  log(state)
+  // log(state)
 }
 
 function onloadUpdate() {
   state.blocks.forEach((el) => {
     switch (el) {
       case 'time-hide':
-        log(el)
+        // log(el)
         CHECKBOX_HIDESHOW.forEach((el) => {
           if (el.value === 'time') el.removeAttribute('checked')
         })
         break
       //
       case 'date-hide':
-        log(el)
+        // log(el)
         CHECKBOX_HIDESHOW.forEach((el) => {
           if (el.value === 'date') el.removeAttribute('checked')
         })
         break
       //
       case 'greeting-hide':
-        log(el)
+        // log(el)
         CHECKBOX_HIDESHOW.forEach((el) => {
           if (el.value === 'greeting') el.removeAttribute('checked')
         })
         break
       //
       case 'quote-hide':
-        log(el)
+        // log(el)
         CHECKBOX_HIDESHOW.forEach((el) => {
           if (el.value === 'quote') el.removeAttribute('checked')
         })
         break
       //
       case 'weather-hide':
-        log(el)
+        // log(el)
         CHECKBOX_HIDESHOW.forEach((el) => {
           if (el.value === 'weather') el.removeAttribute('checked')
         })
         break
       //
       case 'audio-player-hide':
-        log(el)
+        // log(el)
         CHECKBOX_HIDESHOW.forEach((el) => {
           if (el.value === 'audio-player') el.removeAttribute('checked')
         })

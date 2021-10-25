@@ -331,7 +331,7 @@ body {
   text-align: center;
   margin-top: auto;
   margin-bottom: auto;
-  background-color: tomato;
+  /* background-color: tomato; */
   top: 50%;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
@@ -369,8 +369,10 @@ body {
   position: relative;
   height: 100%;
   width: 30%;
-  background-color: turquoise;
+  /* background-color: turquoise; */
   padding: 1rem;
+  outline: 1px solid #fff;
+  border-radius: 5px;
 }
 
 .overlay-content__header {

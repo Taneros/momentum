@@ -309,12 +309,18 @@ body {
 }
 
 .settings i {
+  display: inline-block;
   color: rgba(255, 255, 255, 0.493);
 }
 
 .settings:hover {
-  background-color: rgba(0, 0, 0, 0.411);
+  /* background-color: rgba(0, 0, 0, 0.411); */
   transition: all 0.5s ease-in;
+  transform: rotateZ(45deg);
+}
+
+.settings:hover i {
+  transform: rotate(45deg);
 }
 
 .overlay {

@@ -32,7 +32,7 @@ CITY.addEventListener('change', () => {
 })
 
 async function getWeather() {
-  log('weather-app.js', url)
+  // log('weather-app.js', url)
   try {
     const RES = await fetch(url)
     const DATA = await RES.json()

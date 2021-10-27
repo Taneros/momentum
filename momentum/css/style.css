@@ -467,10 +467,10 @@ body {
 
 /* Change bg styles */
 
-.overlay-content__backgroundSrc > div {
+.overlay-content__bgImgSrc > div {
 }
 
-.overlay-content__backgroundSrc > div p {
+.overlay-content__bgImgSrc > div p {
   text-align: justify;
   line-height: 2rem;
   font-size: 1.3rem;
@@ -538,6 +538,75 @@ body {
 }
 
 .translate__checkbox .container .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+
+/* IMage BG section styles */
+
+.bgImgSrc__checkbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.bgImgSrc__checkbox .container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  /* margin-bottom: 12px; */
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.bgImgSrc__checkbox .container:last-child {
+  margin-left: 20px;
+}
+
+.bgImgSrc__checkbox .container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.bgImgSrc__checkbox .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+.bgImgSrc__checkbox .container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.bgImgSrc__checkbox .container input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+
+.bgImgSrc__checkbox .checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+.bgImgSrc__checkbox .container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.bgImgSrc__checkbox .container .checkmark:after {
   top: 9px;
   left: 9px;
   width: 8px;

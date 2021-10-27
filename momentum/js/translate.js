@@ -38,11 +38,11 @@ function translate() {
   // translate settigns
   if (state.language === 'RU') {
     document.querySelector('#myNav > div > div.overlay-content__hideShowEl > h2').textContent = 'Скрыть элементы'
-    document.querySelector('#myNav > div > div.overlay-content__backgroundSrc > h2').textContent = 'Сменить заставку'
+    document.querySelector('#myNav > div > div.overlay-content__bgImgSrc > h2').textContent = 'Сменить заставку'
     document.querySelector('#myNav > div > div.overlay-content__translate > h2').textContent = 'Сменить язык'
   } else {
     document.querySelector('#myNav > div > div.overlay-content__hideShowEl > h2').textContent = 'Hide Elements'
-    document.querySelector('#myNav > div > div.overlay-content__backgroundSrc > h2').textContent = 'Change Background'
+    document.querySelector('#myNav > div > div.overlay-content__bgImgSrc > h2').textContent = 'Change Background'
     document.querySelector('#myNav > div > div.overlay-content__translate > h2').textContent = 'Change Language'
   }
   // translate weather

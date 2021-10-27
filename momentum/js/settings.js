@@ -3,10 +3,11 @@ console.log(`✔️settings.js loaded`)
 let log = console.log
 
 import { translate } from './translate.js'
+import { setBG } from './bg-change.js'
 
 let state = {
   language: 'EN',
-  photoSrc: 'github',
+  imgSrc: 'github',
   blocks: [],
 }
 
@@ -14,6 +15,7 @@ const SETTINGS = document.querySelector('.settings')
 const CLOSE = document.querySelector('.closebtn')
 const CHECKBOX_HIDESHOW = document.querySelectorAll('#myNav > div > div.overlay-content__hideShowEl input[type=checkbox]')
 const CHECKBOX_TRANS = document.querySelectorAll('#myNav > div > div.overlay-content__translate input[type=radio]')
+const CHECKBOX_IMG_SRC = document.querySelectorAll('#myNav > div > div.overlay-content__bgImgSrc input[type=radio]')
 // ELEMENTS TO HIDE
 const TIME = document.querySelector('.time')
 const DATE = document.querySelector('.date')
@@ -27,6 +29,7 @@ const PLAYER = document.querySelector('.player')
 // EVENT LISTENERS
 SETTINGS.addEventListener('click', () => openNav())
 CLOSE.addEventListener('click', () => closeNav())
+
 CHECKBOX_TRANS.forEach((el) => {
   el.addEventListener('click', () => {
     if (!el.checked) el.setAttribute('checked', 'true')
@@ -37,6 +40,19 @@ CHECKBOX_TRANS.forEach((el) => {
     updateState()
   })
 })
+
+CHECKBOX_IMG_SRC.forEach((el) => {
+  el.addEventListener('click', () => {
+    if (!el.checked) el.setAttribute('checked', 'true')
+    // log(el.value)
+    // state.language == el.value
+    if (el.value === 'github') CHECKBOX_TRANS[0].removeAttribute('checked')
+    if (el.value === 'flickr') CHECKBOX_TRANS[1].removeAttribute('checked')
+    updateState()
+    setBG()
+  })
+})
+
 CHECKBOX_HIDESHOW.forEach((el) =>
   el.addEventListener('click', () => {
     // log(el)
@@ -82,6 +98,9 @@ function updateState() {
     // log('updateItems()', state.language)
   })
   // log(CHECKBOX_TRANS[0].checked, CHECKBOX_TRANS[1].checked)
+  CHECKBOX_IMG_SRC.forEach((el) => {
+    if (el.checked) state.imgSrc = el.value
+  })
   // log(state)
 }
 
@@ -135,11 +154,18 @@ function onloadUpdate() {
     }
   })
   if (state.language === 'EN') {
-    CHECKBOX_TRANS[0].setAttribute('checked', 'checked')
+    CHECKBOX_TRANS[0].setAttribute('checked', 'true')
     CHECKBOX_TRANS[1].removeAttribute('checked')
   } else {
-    CHECKBOX_TRANS[1].setAttribute('checked', 'checked')
+    CHECKBOX_TRANS[1].setAttribute('checked', 'true')
     CHECKBOX_TRANS[0].removeAttribute('checked')
+  }
+  if (state.imgSrc === 'flickr') {
+    CHECKBOX_IMG_SRC[0].setAttribute('checked', 'true')
+    CHECKBOX_IMG_SRC[1].removeAttribute('checked')
+  } else {
+    CHECKBOX_IMG_SRC[1].setAttribute('checked', 'true')
+    CHECKBOX_IMG_SRC[0].removeAttribute('checked')
   }
   translate()
 }
@@ -221,4 +247,4 @@ window.addEventListener('load', getLocalStorageSettings)
  *
  */
 
-export { state, updateState, onloadUpdate }
+export { state, updateState, onloadUpdate, getLocalStorageSettings }

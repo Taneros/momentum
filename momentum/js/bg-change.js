@@ -3,7 +3,9 @@ console.log(`✔️bg-change.js loaded`)
 let log = console.log
 
 import { getTimeOfDay } from './greeting.js'
+import { state, getLocalStorageSettings } from './settings.js'
 
+getLocalStorageSettings()
 // console.log(getTimeOfDay())
 let randomNum
 const BODY = document.querySelector('body')
@@ -55,8 +57,8 @@ function getTimeOfDayBg() {
 }
 
 function setBG(click = false) {
-  if (false) getImgGitHub(click)
-  if (true) getImgFlickr()
+  if (state.imgSrc === 'github') getImgGitHub(click)
+  if (state.imgSrc === 'flickr') getImgFlickr()
 }
 
 async function getImgGitHub(click) {
@@ -89,6 +91,7 @@ async function getImgFlickr() {
 }
 
 function getSlideNext() {
+  if (state.imgSrc === 'github') getRandomNum(20)
   const NUM = Number(randomNum)
   // log(NUM)
   if (NUM === 20) randomNum = `${1}`.padStart(2, '0')
@@ -97,6 +100,7 @@ function getSlideNext() {
 }
 
 function getSlidePrev() {
+  if (state.imgSrc === 'github') getRandomNum(20)
   const NUM = Number(randomNum)
   // log(NUM)
   if (NUM === 1) randomNum = `${20}`.padStart(2, '0')
@@ -104,14 +108,9 @@ function getSlidePrev() {
   setBG(true)
 }
 
+export { setBG }
+
 // TODO
 /**
- *  isolate commonly used functions
- * get time of Day
- *
- * debounce
- *
- */
 
-// log(getTimeOfDay().split(' ')[1])
-// log(BODY)
+ */

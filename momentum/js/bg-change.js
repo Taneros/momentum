@@ -7,7 +7,7 @@ import { state, getLocalStorageSettings } from './settings.js'
 
 getLocalStorageSettings()
 // console.log(getTimeOfDay())
-let randomNum
+let randomNum = state.lastGithubImg || undefined
 const BODY = document.querySelector('body')
 const IMG_LINK = 'https://raw.githubusercontent.com/Taneros/stage1-tasks/assets/images/'
 const SLIDE_PREV = document.querySelector('.slide-prev')
@@ -59,6 +59,7 @@ function getTimeOfDayBg() {
 function setBG(click = false) {
   if (state.imgSrc === 'github') getImgGitHub(click)
   if (state.imgSrc === 'flickr') getImgFlickr()
+  if (state.imgSrc === 'unsplash') getImgUnsplash()
 }
 
 async function getImgGitHub(click) {
@@ -71,6 +72,8 @@ async function getImgGitHub(click) {
     // log(`image loaded`)
     BODY.style.cssText = `background-image: url(${img.src})`
   }
+  state.lastGithubImg = randomNum
+  console.log(state.lastGithubImg)
 }
 
 async function getImgFlickr() {
@@ -90,9 +93,21 @@ async function getImgFlickr() {
   }
 }
 
+async function getImgUnsplash() {
+  log(`Unsplash img source LIMIT 50 pics/hr!`)
+  const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=nature&client_id=xPw4coWZpgPh4OfvSXnzMGBecVEZL_2GpUhzsCKg4Rs`
+  const res = await fetch(url)
+  const data = await res.json()
+  const img = new Image()
+  img.src = data.urls.regular
+  img.onload = () => {
+    BODY.style.cssText = `background-image: url(${img.src})`
+  }
+}
+
 function getSlideNext() {
-  if (state.imgSrc === 'github') getRandomNum(20)
-  const NUM = Number(randomNum)
+  // if (state.imgSrc === 'github') getRandomNum(20)
+  const NUM = Number(state.lastGithubImg)
   // log(NUM)
   if (NUM === 20) randomNum = `${1}`.padStart(2, '0')
   else randomNum = (NUM + 1).toString().padStart(2, '0')
@@ -100,8 +115,8 @@ function getSlideNext() {
 }
 
 function getSlidePrev() {
-  if (state.imgSrc === 'github') getRandomNum(20)
-  const NUM = Number(randomNum)
+  // if (state.imgSrc === 'github') getRandomNum(20)
+  const NUM = Number(state.lastGithubImg)
   // log(NUM)
   if (NUM === 1) randomNum = `${20}`.padStart(2, '0')
   else randomNum = (NUM - 1).toString().padStart(2, '0')

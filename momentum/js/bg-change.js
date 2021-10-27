@@ -3,9 +3,10 @@ console.log(`✔️bg-change.js loaded`)
 let log = console.log
 
 import { getTimeOfDay } from './greeting.js'
+import { state, getLocalStorageSettings } from './settings.js'
 
+getLocalStorageSettings()
 // console.log(getTimeOfDay())
-
 let randomNum
 const BODY = document.querySelector('body')
 const IMG_LINK = 'https://raw.githubusercontent.com/Taneros/stage1-tasks/assets/images/'
@@ -33,11 +34,14 @@ function bounce(f, w, i) {
   }
 }
 
-function getRandomNum() {
+function getRandomNum(num = 20) {
   const MIN = 1
-  const MAX = 20
+  const MAX = num
   const NUM = Math.floor(Math.random() * (MAX - MIN + 1) + MIN).toString()
-  randomNum = NUM.padStart(2, '0')
+  let rndNum = NUM.padStart(2, '0')
+  // console.log(`random num ${randomNum}`)
+  randomNum = rndNum
+  return rndNum
 }
 
 function getTimeOfDayBg() {
@@ -52,31 +56,61 @@ function getTimeOfDayBg() {
   else if (TIME_HR >= 0 && TIME_HR < 6) return 'night'
 }
 
-function setBG() {
-  // log(`setBG randomNum ${randomNum}`)
+function setBG(click = false) {
+  if (state.imgSrc === 'github') getImgGitHub(click)
+  if (state.imgSrc === 'flickr') getImgFlickr()
+}
+
+async function getImgGitHub(click) {
+  log(`Github img source`)
+  const url = 'https://raw.githubusercontent.com/Taneros/stage1-tasks/assets/images/'
   const img = new Image()
-  img.src = `${IMG_LINK + getTimeOfDayBg() + '/' + randomNum}.jpg`
+  if (!click) img.src = `${url + getTimeOfDayBg() + '/' + getRandomNum(20)}.jpg`
+  else img.src = `${url + getTimeOfDayBg() + '/' + randomNum}.jpg`
   img.onload = () => {
     // log(`image loaded`)
-    BODY.style.cssText = `background-image: url('${IMG_LINK + getTimeOfDayBg() + '/' + randomNum}.jpg')`
+    BODY.style.cssText = `background-image: url(${img.src})`
+  }
+}
+
+async function getImgFlickr() {
+  log(`Flicker img source`)
+  const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=10fa0cd7a5d8e616f96e23509396fa6b&tags=nature,${getTimeOfDayBg()},-people&tag_mode=all&extras=url_h&format=json&nojsoncallback=1`
+  const res = await fetch(url)
+  const data = await res.json()
+  let photoArrLen = data.photos.photo.length - 1
+  // log(data.photos.photo[99].url_h)
+  let randomFlickrNum = getRandomNum(photoArrLen)
+  const img = new Image()
+  // log(randomFlickrNum)
+  img.src = data.photos.photo[Number(randomFlickrNum)].url_h
+  // log(img.src)
+  img.onload = () => {
+    BODY.style.cssText = `background-image: url(${img.src})`
   }
 }
 
 function getSlideNext() {
+  if (state.imgSrc === 'github') getRandomNum(20)
   const NUM = Number(randomNum)
   // log(NUM)
   if (NUM === 20) randomNum = `${1}`.padStart(2, '0')
   else randomNum = (NUM + 1).toString().padStart(2, '0')
-  setBG()
+  setBG(true)
 }
 
 function getSlidePrev() {
+  if (state.imgSrc === 'github') getRandomNum(20)
   const NUM = Number(randomNum)
   // log(NUM)
   if (NUM === 1) randomNum = `${20}`.padStart(2, '0')
   else randomNum = (NUM - 1).toString().padStart(2, '0')
-  setBG()
+  setBG(true)
 }
 
-// log(getTimeOfDay().split(' ')[1])
-// log(BODY)
+export { setBG }
+
+// TODO
+/**
+
+ */

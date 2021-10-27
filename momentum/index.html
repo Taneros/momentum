@@ -61,60 +61,66 @@
           <div class="overlay-content__hideShowEl">
             <h2 class="overlay-content__header">Hide Elements</h2>
             <div class="hideShowEl__checkbox">
-              <label class="container"
+              <label class="container" for="hide1"
                 ><span>Time</span>
-                <input type="checkbox" data-time-show="" value="time" checked="true" />
+                <input type="checkbox" data-time-show="" value="time" checked="true" id="hide1" />
                 <span class="checkmark"></span>
               </label>
-              <label class="container"
+              <label class="container" for="hide2"
                 ><span>Date</span>
-                <input type="checkbox" data-date-show="" value="date" checked="true" />
+                <input type="checkbox" data-date-show="" value="date" checked="true" id="hide2" />
                 <span class="checkmark"></span>
               </label>
-              <label class="container"
+              <label class="container" for="hide3"
                 ><span>Greeting</span>
-                <input type="checkbox" data-greeting-show="" value="greeting" checked="true" />
+                <input type="checkbox" data-greeting-show="" value="greeting" checked="true" id="hide3" />
                 <span class="checkmark"></span>
               </label>
-              <label class="container"
+              <label class="container" for="hide4"
                 ><span>Quote of Day</span>
-                <input type="checkbox" data-quote-show="" value="quote" checked="true" />
+                <input type="checkbox" data-quote-show="" value="quote" checked="true" id="hide4" />
                 <span class="checkmark"></span>
               </label>
-              <label class="container"
+              <label class="container" for="hide5"
                 ><span>Weather</span>
-                <input type="checkbox" data-weather-show="" value="weather" checked="true" />
+                <input type="checkbox" data-weather-show="" value="weather" checked="true" id="hide5" />
                 <span class="checkmark"></span>
               </label>
-              <label class="container"
+              <label class="container" for="hide6"
                 ><span>Audio Player</span>
-                <input type="checkbox" data-audio-player-show="" value="audio-player" checked="true" />
+                <input type="checkbox" data-audio-player-show="" value="audio-player" checked="true" id="hide6" />
                 <span class="checkmark"></span>
               </label>
             </div>
           </div>
-          <div class="overlay-content__backgroundSrc">
+          <div class="overlay-content__bgImgSrc">
             <h2 class="overlay-content__header">Change Background</h2>
             <div>
-              <p>Привет тебе, проверяющий!</p>
-              <p>Я сейчас доделываю смену заставки с картинками от Flickr API.</p>
-              <p>Если есть возможность, отложи проверку на день, пожалуйста?</p>
-              <p>Если прочитал это, свяжись со мной в Discord @Renat(@Taneros)</p>
-              <br />
-              <p>Буду благодарен!</p>
+              <div class="bgImgSrc__checkbox">
+                <label class="container" for="bgImgSrc1"
+                  >Flickr
+                  <input type="radio" value="flickr" name="bgImgSrc1" id="bgImgSrc1" />
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container" for="bgImgSrc2"
+                  >Github
+                  <input type="radio" value="github" name="bgImgSrc1" id="bgImgSrc2" checked="true" />
+                  <span class="checkmark"></span>
+                </label>
+              </div>
             </div>
           </div>
           <div class="overlay-content__translate">
             <h2 class="overlay-content__header">Change Language</h2>
             <div class="translate__checkbox">
-              <label class="container"
+              <label class="container" for="lang1"
                 >EN
-                <input type="radio" checked="true" value="EN" name="radio" />
+                <input type="radio" checked="true" value="EN" name="radio" id="lang1" name="lang1" />
                 <span class="checkmark"></span>
               </label>
-              <label class="container"
+              <label class="container" for="lang2"
                 >РУС
-                <input type="radio" value="RU" name="radio" />
+                <input type="radio" value="RU" name="radio" id="lang2" name="lang2" />
                 <span class="checkmark"></span>
               </label>
             </div>

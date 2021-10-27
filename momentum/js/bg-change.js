@@ -73,7 +73,7 @@ async function getImgGitHub(click) {
     BODY.style.cssText = `background-image: url(${img.src})`
   }
   state.lastGithubImg = randomNum
-  console.log(state.lastGithubImg)
+  // console.log(state.lastGithubImg)
 }
 
 async function getImgFlickr() {

@@ -7,8 +7,9 @@ import { setBG } from './bg-change.js'
 
 let state = {
   language: 'EN',
-  imgSrc: 'github',
+  imgSrc: '',
   blocks: [],
+  lastGithubImg: null,
 }
 
 const SETTINGS = document.querySelector('.settings')
@@ -16,6 +17,7 @@ const CLOSE = document.querySelector('.closebtn')
 const CHECKBOX_HIDESHOW = document.querySelectorAll('#myNav > div > div.overlay-content__hideShowEl input[type=checkbox]')
 const CHECKBOX_TRANS = document.querySelectorAll('#myNav > div > div.overlay-content__translate input[type=radio]')
 const CHECKBOX_IMG_SRC = document.querySelectorAll('#myNav > div > div.overlay-content__bgImgSrc input[type=radio]')
+// console.log(CHECKBOX_IMG_SRC)
 // ELEMENTS TO HIDE
 const TIME = document.querySelector('.time')
 const DATE = document.querySelector('.date')
@@ -32,22 +34,16 @@ CLOSE.addEventListener('click', () => closeNav())
 
 CHECKBOX_TRANS.forEach((el) => {
   el.addEventListener('click', () => {
-    if (!el.checked) el.setAttribute('checked', 'true')
-    // log(el.value)
-    // state.language == el.value
-    if (el.value === 'RU') CHECKBOX_TRANS[0].removeAttribute('checked')
-    if (el.value === 'EN') CHECKBOX_TRANS[1].removeAttribute('checked')
+    CHECKBOX_TRANS.forEach((el) => el.removeAttribute('checked'))
+    el.setAttribute('checked', 'true')
     updateState()
   })
 })
 
 CHECKBOX_IMG_SRC.forEach((el) => {
   el.addEventListener('click', () => {
-    if (!el.checked) el.setAttribute('checked', 'true')
-    // log(el.value)
-    // state.language == el.value
-    if (el.value === 'github') CHECKBOX_TRANS[0].removeAttribute('checked')
-    if (el.value === 'flickr') CHECKBOX_TRANS[1].removeAttribute('checked')
+    CHECKBOX_IMG_SRC.forEach((ell) => ell.removeAttribute('checked'))
+    el.setAttribute('checked', 'true')
     updateState()
     setBG()
   })
@@ -55,7 +51,6 @@ CHECKBOX_IMG_SRC.forEach((el) => {
 
 CHECKBOX_HIDESHOW.forEach((el) =>
   el.addEventListener('click', () => {
-    // log(el)
     if (!el.checked) el.setAttribute('checked', 'true')
     updateState()
   })
@@ -95,9 +90,7 @@ function updateState() {
   })
   CHECKBOX_TRANS.forEach((el) => {
     if (el.checked) state.language = el.value
-    // log('updateItems()', state.language)
   })
-  // log(CHECKBOX_TRANS[0].checked, CHECKBOX_TRANS[1].checked)
   CHECKBOX_IMG_SRC.forEach((el) => {
     if (el.checked) state.imgSrc = el.value
   })
@@ -163,16 +156,21 @@ function onloadUpdate() {
   if (state.imgSrc === 'flickr') {
     CHECKBOX_IMG_SRC[0].setAttribute('checked', 'true')
     CHECKBOX_IMG_SRC[1].removeAttribute('checked')
-  } else {
+    CHECKBOX_IMG_SRC[2].removeAttribute('checked')
+  } else if (state.imgSrc === 'unsplash') {
     CHECKBOX_IMG_SRC[1].setAttribute('checked', 'true')
     CHECKBOX_IMG_SRC[0].removeAttribute('checked')
+    CHECKBOX_IMG_SRC[2].removeAttribute('checked')
+  } else if (state.imgSrc === 'gihub') {
+    CHECKBOX_IMG_SRC[2].setAttribute('checked', 'true')
+    CHECKBOX_IMG_SRC[0].removeAttribute('checked')
+    CHECKBOX_IMG_SRC[1].removeAttribute('checked')
   }
   translate()
 }
 
 function showHide() {
   state.blocks.forEach((el, idx) => {
-    // log(el)
     switch (el) {
       case 'time':
         TIME.style.cssText = 'visibility: visible;'
@@ -223,7 +221,6 @@ function showHide() {
 }
 
 function setLocalStorageSettings() {
-  // updateItems()
   localStorage.setItem('settings', JSON.stringify(state))
 }
 

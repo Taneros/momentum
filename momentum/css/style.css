@@ -618,6 +618,61 @@ body {
   background: white;
 }
 
+/* student info */
+
+.student-info {
+  height: auto;
+  width: 70vw;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.student-info__details {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.student-info__details p {
+  /* font-family: Roboto;
+  /* font-style: normal; */
+  font-weight: 200;
+  font-size: 1.3rem;
+  /* line-height: 1.5rem; */
+  /* identical to box height, or 100% */
+  /* letter-spacing: 2px; */
+}
+
+.student-info__details > * {
+  font-weight: 200;
+  font-size: 1.3rem;
+  /* letter-spacing: 2px; */
+  color: #ffffff;
+  text-decoration: none;
+}
+
+#rss {
+  position: relative;
+}
+
+#rss::before {
+  /* content: url('../assets/svg/rs_school_js.svg'); */
+  /* background-image: url('../assets/svg/rs_school_js.svg'); */
+  /* background-size: cover; */
+  /* height: 50px;
+  position: absolute;
+  content: '';
+  background: url('../assets/svg/rs_school_js.svg');
+  width: 50px;
+  height: 25px;
+  display: block;
+  background-size: cover;
+  left: -60px;
+  top: -10px; */
+}
+
 /* app reseize */
 @media (max-width: 768px) {
   .time {

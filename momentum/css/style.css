@@ -553,6 +553,9 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  margin-left: auto;
+  margin-right: auto;
+  width: max-content;
 }
 
 .bgImgSrc__checkbox .container {
@@ -569,10 +572,6 @@ body {
 }
 .bgImgSrc__checkbox .container {
   margin-bottom: 12px;
-}
-
-.bgImgSrc__checkbox .container:last-child {
-  /* margin-left: 20px; */
 }
 
 .bgImgSrc__checkbox .container input {

@@ -76,10 +76,10 @@ function translate() {
   // translate greeting
   if (state.language === 'RU') {
     GREETING_TEXT.locale = RU_GREETING
-    document.querySelector('body > main > div.greeting-container > input').value = 'друг!'
+    document.querySelector('body > main > div.greeting-container > input').value = localStorage.getItem('name') || GREETING_TEXT.username
   } else {
     GREETING_TEXT.locale = EN_GREETING
-    document.querySelector('body > main > div.greeting-container > input').value = 'friend!'
+    document.querySelector('body > main > div.greeting-container > input').value = localStorage.getItem('name') || GREETING_TEXT.username
   }
   // translate time
   if (state.language === 'RU') {

@@ -4,7 +4,11 @@ let log = console.log
 
 export const GREETING = document.querySelector('.greeting')
 export const NAME = document.querySelector('.name')
-const GREETING_TEXT = { locale: ['🌅Good morning', '🌞Good afternoon', '🌇Good evening', '🌙Good night'] }
+const GREETING_TEXT = { locale: ['🌅Good morning', '🌞Good afternoon', '🌇Good evening', '🌙Good night'], username: 'friend' }
+
+NAME.addEventListener('change', () => {
+  // GREETING_TEXT.username = NAME.value
+})
 
 // Greeting
 export function getTimeOfDay() {
@@ -27,13 +31,16 @@ function showGreeting() {
 function setLocalStorage() {
   localStorage.setItem('name', NAME.value)
 }
-window.addEventListener('beforeunload', setLocalStorage)
 
 function getLocalStorage() {
-  const LOCAL_NAME = localStorage.getItem('name')
-  if (LOCAL_NAME) NAME.value = LOCAL_NAME
+  // let LOCAL_NAME = localStorage.getItem('name')
+  // if (LOCAL_NAME) NAME.value = LOCAL_NAME
+  // log(localStorage.getItem('name'))
+  if (localStorage.getItem('name')) NAME.value = localStorage.getItem('name') || GREETING_TEXT.username
   NAME.style.width = (NAME.value.length + 1) * 1.1 + 'ch'
 }
+
+window.addEventListener('beforeunload', setLocalStorage)
 window.addEventListener('load', getLocalStorage)
 
 // TODO wrap everyting in one export in individual parts are not required
